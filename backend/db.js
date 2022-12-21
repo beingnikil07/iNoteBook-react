@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose"); // we are using common js to include mongoose
 
-const mongoURI = "mongodb://localhost:27017"; // mongoose connection string essential to connect with database
+const mongoURI = "mongodb://localhost:27017/iNotebook"; // mongoose connection string essential to connect with database
 
 const connectToMongo = () => {
   mongoose.connect(mongoURI, () => {

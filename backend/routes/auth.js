@@ -1,13 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const { body, validationResult } = require('express-validator');
+const user=require('../models/User')
+router.post("/", [
+  body('name').isLength({ min: 3 }),
+  body('email').isEmail(),
+  body('password').isLength({ min: 5 }),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-router.post("/", (req, res) => {
-  console.log(req.body);
-  const user = User(req.body); //User schema ko humne req.body de dii
-  // hum jo bhi req se data send karenge thunderclient ke through
-  //wo mongoDb ke User mai jaayega
-  user.save();    // for saving the data in user 
-  res.send(req.body);
+
+  // for creating a fully validated user
+  user.create({
+    name: req.body.name,
+    password: req.body.password,
+    email:req.body.email,
+  }).then(user => res.json(user)) 
+
 });
 module.exports = router;
