@@ -1,11 +1,8 @@
-const express=require('express')  // express imported
-const router=express.Router();   // importing express router 
+const express=require('express')  
+const router=express.Router();  
 
 router.get('/',(req,res)=>{ 
-    let obj={
-        a:'nikhil',
-        number:125
-    }
-    res.json(obj);
+   console.log(req.body) 
+   res.send(req.body)   
 })
 module.exports=router;

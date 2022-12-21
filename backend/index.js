@@ -1,8 +1,10 @@
 const connectToMongo = require("./db");
 const express = require("express");
 connectToMongo();
-const app = express(); // app have all methods and properties of express
+const app = express()
 const port = 3000;
+
+app.use(express.json())  // request kii body mai content dekhne ke liye iss middleware ka use karte hai
 
 //available routes
 app.use("/api/auth", require("./routes/auth")); // app.use() is used for routes
